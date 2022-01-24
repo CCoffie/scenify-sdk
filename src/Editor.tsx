@@ -177,7 +177,11 @@ class Editor extends EventManager {
   public importFromJSON = data => {
     this.handlers.templateHandler.importFromJSON(data)
   }
-  public toSVG = () => {}
+  public toSVG = (options: any) => {
+    var filedata = this.handlers.designHandler.toSVG(options) 
+    var locfile = new Blob([filedata], {type: "image/svg+xml;charset=utf-8"})
+    return URL.createObjectURL(locfile)
+  }
   public toPNG = (options: any) => {
     return this.handlers.designHandler.toDataURL(options)
   }
