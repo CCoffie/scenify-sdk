@@ -16,6 +16,17 @@ class DesignHandler extends BaseHandler {
     })
     return data
   }
+  
+  public async toSVG(params: any) {
+    const staticCanvas = new fabric.StaticCanvas(null)
+    const template = this.handlers.templateHandler.exportToJSON() as Template
+    await this.loadTemplate(staticCanvas, template, params)
+    const data = staticCanvas.toSVG({
+      height: staticCanvas.getHeight(),
+      width: staticCanvas.getWidth()
+    })
+    return data
+  }
 
   private async loadTemplate(staticCanvas: fabric.StaticCanvas, template: Template, params) {
     const { frame, background } = template
